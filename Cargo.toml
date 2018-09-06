@@ -1,0 +1,12 @@
+[package]
+name = "falcon-riscv"
+version = "0.0.1"
+authors = [ "Alex Eubanks <endeavor@rainbowsandpwnies.com>" ]
+repository = "https://github.com/falconre/falcon-riscv"
+description = "RISC-V Instruction Decoder in Rust"
+license = "Apache-2.0"
+readme = "README.md"
+
+[lib]
+name = "falcon_riscv"
+path = "lib/lib.rs"
