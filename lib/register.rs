@@ -1,6 +1,5 @@
 use std::fmt;
 
-
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Register {
     Zero, // x0
@@ -15,8 +14,8 @@ pub enum Register {
     S1,   // x9
     A0,   // x10
     A1,   // x11
-    A2,  // x12
-    A3,  // x13
+    A2,   // x12
+    A3,   // x13
     A4,   // x14
     A5,   // x15
     A6,   // x16
@@ -29,29 +28,28 @@ pub enum Register {
     S7,   // x23
     S8,   // x24
     S9,   // x25
-    S10,   // x26
-    S11,   // x27
+    S10,  // x26
+    S11,  // x27
     T3,   // x28
     T4,   // x29
     T5,   // x30
     T6,   // x31
-    Invalid
+    Invalid,
 }
-
 
 impl Register {
     pub(crate) fn from_u32(u: u32) -> Register {
         match u {
-            0  => Register::Zero,
-            1  => Register::Ra,
-            2  => Register::Sp,
-            3  => Register::Gp,
-            4  => Register::Tp,
-            5  => Register::T0,
-            6  => Register::T1,
-            7  => Register::T2,
-            8  => Register::Fp,
-            9  => Register::S1,
+            0 => Register::Zero,
+            1 => Register::Ra,
+            2 => Register::Sp,
+            3 => Register::Gp,
+            4 => Register::Tp,
+            5 => Register::T0,
+            6 => Register::T1,
+            7 => Register::T2,
+            8 => Register::Fp,
+            9 => Register::S1,
             10 => Register::A0,
             11 => Register::A1,
             12 => Register::A2,
@@ -74,11 +72,10 @@ impl Register {
             29 => Register::T4,
             30 => Register::T5,
             31 => Register::T6,
-            _ => Register::Invalid
+            _ => Register::Invalid,
         }
     }
 }
-
 
 impl fmt::Display for Register {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -115,7 +112,7 @@ impl fmt::Display for Register {
             Register::T4 => write!(f, "t4"),
             Register::T5 => write!(f, "t5"),
             Register::T6 => write!(f, "t6"),
-            Register::Invalid => write!(f, "invalid")
+            Register::Invalid => write!(f, "invalid"),
         }
     }
 }

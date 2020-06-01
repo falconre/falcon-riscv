@@ -1,13 +1,11 @@
 use {decode, Op, Register};
 
-
 /*
    0:   00c58533            add a0,a1,a2
    4:   12358513            addi    a0,a1,291
    8:   002372b3            and t0,t1,sp
    c:   fff1f493            andi    s1,gp,-1
 */
-
 
 #[test]
 fn add() {
@@ -21,7 +19,6 @@ fn add() {
     assert_eq!(*instruction.rs2(), Register::A2);
 }
 
-
 #[test]
 fn addi() {
     let word: u32 = 0x12358513;
@@ -33,7 +30,6 @@ fn addi() {
     assert_eq!(*instruction.rs1(), Register::A1);
     assert_eq!(instruction.immediate(), 0x123);
 }
-
 
 #[test]
 fn and() {
@@ -47,7 +43,6 @@ fn and() {
     assert_eq!(*instruction.rs2(), Register::Sp);
 }
 
-
 #[test]
 fn andi() {
     let word: u32 = 0xfff1f493;
@@ -57,9 +52,8 @@ fn andi() {
     assert_eq!(*instruction.op(), Op::Andi);
     assert_eq!(*instruction.rd(), Register::S1);
     assert_eq!(*instruction.rs1(), Register::Gp);
-    assert_eq!(instruction.immediate(), -1);
+    assert_eq!(instruction.immediate(), 0xffffffff);
 }
-
 
 #[test]
 fn auipc() {
@@ -71,7 +65,6 @@ fn auipc() {
     assert_eq!(*instruction.rd(), Register::A0);
     assert_eq!(instruction.immediate(), 0x12345);
 }
-
 
 #[test]
 fn beq() {
@@ -85,19 +78,17 @@ fn beq() {
     assert_eq!(instruction.immediate(), 12);
 }
 
-
 #[test]
 fn bge() {
     let word: u32 = 0x00b55263;
 
     let instruction = decode(word).unwrap();
 
-    assert_eq!(*instruction.op(), Op::Beq);
+    assert_eq!(*instruction.op(), Op::Bge);
     assert_eq!(*instruction.rs1(), Register::A0);
     assert_eq!(*instruction.rs2(), Register::A1);
     assert_eq!(instruction.immediate(), 4);
 }
-
 
 #[test]
 fn bgeu() {
@@ -105,12 +96,11 @@ fn bgeu() {
 
     let instruction = decode(word).unwrap();
 
-    assert_eq!(*instruction.op(), Op::Beq);
+    assert_eq!(*instruction.op(), Op::Bgeu);
     assert_eq!(*instruction.rs1(), Register::A0);
     assert_eq!(*instruction.rs2(), Register::A1);
     assert_eq!(instruction.immediate(), 4);
 }
-
 
 #[test]
 fn blt() {
@@ -118,12 +108,11 @@ fn blt() {
 
     let instruction = decode(word).unwrap();
 
-    assert_eq!(*instruction.op(), Op::Beq);
+    assert_eq!(*instruction.op(), Op::Blt);
     assert_eq!(*instruction.rs1(), Register::A0);
     assert_eq!(*instruction.rs2(), Register::A1);
     assert_eq!(instruction.immediate(), 4);
 }
-
 
 #[test]
 fn bltu() {
@@ -131,12 +120,11 @@ fn bltu() {
 
     let instruction = decode(word).unwrap();
 
-    assert_eq!(*instruction.op(), Op::Beq);
+    assert_eq!(*instruction.op(), Op::Bltu);
     assert_eq!(*instruction.rs1(), Register::A0);
     assert_eq!(*instruction.rs2(), Register::A1);
     assert_eq!(instruction.immediate(), 4);
 }
-
 
 #[test]
 fn bne() {
@@ -144,7 +132,7 @@ fn bne() {
 
     let instruction = decode(word).unwrap();
 
-    assert_eq!(*instruction.op(), Op::Beq);
+    assert_eq!(*instruction.op(), Op::Bne);
     assert_eq!(*instruction.rs1(), Register::A0);
     assert_eq!(*instruction.rs2(), Register::A1);
     assert_eq!(instruction.immediate(), 4);
